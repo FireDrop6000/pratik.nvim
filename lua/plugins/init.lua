@@ -167,6 +167,9 @@ return {
 
     {
         "L3MON4D3/LuaSnip",
+        dependencies = {
+            "rafamadriz/friendly-snippets"
+        },
         version = "v2.*",
         build = "make install_jsregexp",
         config = function()
@@ -176,14 +179,34 @@ return {
 
     {
         "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         dependencies = { "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip", "hrsh7th/cmp-path", "hrsh7th/cmp-emoji" },
         config = function()
             local cmp = require("cmp")
+            local luasnip = require("luasnip")
+            require("luasnip.loaders.from_vscode").lazy_load()
             cmp.setup({
+                completion = {
+                    completeopt = "menu,menuone,preview,noselect"
+                },
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-k>"] = cmp.mapping.select_prev_item(),
+                    ["<C-j>"] = cmp.mapping.select_next_item(),
+                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-Spc>"] = cmp.mapping.complete(),
+                    ["<C-x>"] = cmp.mapping.abort(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = false })
+                }),
                 sources = cmp.config.sources({
-                    { name = "buffer" },
-                    { name = "luasnip" },
                     { name = "nvim_lsp" },
+                    { name = "luasnip" },
+                    { name = "buffer" },
                     { name = "path" },
                     { name = "emoji" },
                     { name = "vim-dadbod-completion" },
@@ -341,6 +364,32 @@ return {
     },
 
     {
+        "brianhuster/autosave.nvim",
+        lazy = false,
+        event = "InsertEnter",
+        config = function()
+            local opts = {
+                command = "Autosave",
+                toggle_arg = "toggle",
+                status_arg = "status",
+            }
+
+            local function toggle_autosave_if_in_nvim_config(command, toggle_arg)
+                local cwd = vim.fn.getcwd()
+
+                local home = vim.fn.expand("~")
+
+                local nvim_config_dir = home .. "/.config/nvim"
+
+                if cwd:sub(1, #nvim_config_dir) == nvim_config_dir then
+                    vim.cmd(command .. " " .. toggle_arg)
+                end
+            end
+            toggle_autosave_if_in_nvim_config(opts.command, opts.toggle_arg)
+        end
+    },
+
+    {
         "brianhuster/live-preview.nvim",
         dependencies = { "brianhuster/autosave.nvim" },
         config = function()
@@ -393,13 +442,80 @@ return {
         end,
     },
 
-    -- {
-    --      "elmcgill/springboot-nvim",
-    --     dependencies= {
-    --     "neovim/nvim-lspconfig",
-    --     "mfussenegger/nvim-jdtls"
-    --     },
-    --     config = function ()
-    --       local spring
-    --     end
+    {
+        "elmcgill/springboot-nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "mfussenegger/nvim-jdtls"
+        },
+        config = function()
+            local springboot_nvim = require("springboot-nvim")
+
+            vim.keymap.set('n', '<leader>Jr', springboot_nvim.boot_run, { desc = 'Java run Spring Boot' })
+            vim.keymap.set('n', '<leader>Jc', springboot_nvim.generate_class, { desc = "Java create class" })
+            vim.keymap.set('n', '<leader>Ji', springboot_nvim.generate_interface, { desc = "Java create interface" })
+            vim.keymap.set('n', '<leader>Je', springboot_nvim.generate_enum, { desc = "Java create enum" })
+
+            springboot_nvim.setup({})
+        end
+    },
+
+    {
+        "windwp/nvim-autopairs",
+        event = { "InsertEnter" },
+        dependencies = {
+            "hrsh7th/nvim-cmp",
+        },
+        config = function()
+            require("nvim-autopairs").setup({
+                check_ts = true,
+                ts_config = {
+                    lua = { "string" },
+                    javascript = { "template_string" },
+                    java = false,
+                }
+            })
+
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            local cmp = require("cmp")
+
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        end
+    },
+
+    {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("gitsigns").setup({
+                watch_gitdir = {
+                    interval = 1000,
+                    follow_files = true,
+                },
+                attach_to_untracked = true,
+                current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+                update_debounce = 200,
+                max_file_length = 40000,
+                preview_config = {
+                    border = "rounded",
+                    style = "minimal",
+                    relative = "cursor",
+                    row = 0,
+                    col = 1,
+                },
+            })
+
+            vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { desc = "Git preview hunk" })
+        end
+    },
+
+    {
+        "tpope/vim-fugitive",
+        config = function()
+            vim.keymap.set("n", "<leader>gb", ":Git blame<CR>", { desc = "Git blame" })
+            vim.keymap.set("n", "<leader>gA", ":Git add .<CR>", { desc = "Git add all" })
+            vim.keymap.set("n", "<leader>ga", ":Git add<CR>", { desc = "Git add" })
+            vim.keymap.set("n", "<leader>gc", ":Git commit", { desc = "Git commit" })
+            vim.keymap.set("n", "<leader>gp", ":Git push", { desc = "Git push" })
+        end
+    }
 }

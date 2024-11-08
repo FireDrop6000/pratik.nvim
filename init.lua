@@ -6,7 +6,7 @@ vim.wo.fillchars = "eob: "
 vim.opt.clipboard = "unnamedplus"
 vim.opt.fillchars:append('eob: ')
 vim.opt.shortmess:append({ I = true })
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 2
 vim.opt.scrolloff = 10
