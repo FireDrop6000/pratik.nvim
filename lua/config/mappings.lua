@@ -58,16 +58,17 @@ map("n", "<C-s>", ":w<CR>", opts)
 -- Snapshot code
 map("v", "<leader>sc", ":Silicon<CR><CR>", opts)
 
--- Telescope buffer
-map(
-	"n",
-	"<S-h>",
-	"<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal theme=ivy<cr>",
-	{ desc = "[P]Open telescope buffers" }
-)
-
 -- Telescope call
-map("n", "<S-t>", ":Telescope<CR>", opts)
+map("n", "<leader>tt", ":Telescope<CR>", opts)
 
 -- DBUI
 map("n", "<leader>d", ":DBUI<CR>", opts)
+
+-- Insert Mode Navigaton
+map("i", "<C-h>", "<left>", opts)
+map("i", "<C-j>", "<down>", opts)
+map("i", "<C-k>", "<up>", opts)
+map("i", "<C-l>", "<right>", opts)
+
+-- Remove search highlights after searching
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
