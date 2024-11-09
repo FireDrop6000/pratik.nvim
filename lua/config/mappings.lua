@@ -21,7 +21,7 @@ map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
 
 -- File explorer
-map("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Open file [E]xplorer" })
 
 -- Resize windows
 map("n", "<C-right>", ":resize +2<CR>", opts)
@@ -56,13 +56,13 @@ map("i", "<C-e>", "<End>", opts)
 map("n", "<C-s>", ":w<CR>", opts)
 
 -- Snapshot code
-map("v", "<leader>sc", ":Silicon<CR><CR>", opts)
+map("v", "<leader>sc", ":Silicon<CR><CR>", { desc = "[S]napshot [C]ode" })
 
 -- Telescope call
-map("n", "<leader>tt", ":Telescope<CR>", opts)
+map("n", "<leader>T", ":Telescope<CR>", { desc = "[T]elescope" })
 
 -- DBUI
-map("n", "<leader>d", ":DBUI<CR>", opts)
+map("n", "<leader>db", ":DBUI<CR>", { desc = "[D]ata[B]ase UI" })
 
 -- Insert Mode Navigaton
 map("i", "<C-h>", "<left>", opts)

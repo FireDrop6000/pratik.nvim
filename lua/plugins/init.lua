@@ -8,6 +8,13 @@ return {
                 icons_enabled = false,
                 component_separators = "",
                 section_separators = { left = "", right = "" },
+                ignore_focus = { "NvimTree" },
+                refresh = {
+                    statusline = 1000,
+                    tabline = 1000,
+                    winbar = 1000,
+                },
+                globalstatus = false,
             },
             sections = {
                 lualine_a = {
@@ -140,11 +147,11 @@ return {
                 dapui.open()
             end
 
-            vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "Debug toggle breakpoint" })
+            vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "[D]ebug [T]oggle breakpoint" })
 
-            vim.keymap.set("n", "<leader>ds", dap.continue, { desc = "Debug start" })
+            vim.keymap.set("n", "<leader>ds", dap.continue, { desc = "[D]ebug [S]tart" })
 
-            vim.keymap.set("n", "<leader>dc", dap.close, { desc = "Debug close" })
+            vim.keymap.set("n", "<leader>dc", dap.close, { desc = "[D]ebug [C]lose" })
         end
     },
 
@@ -153,15 +160,15 @@ return {
         dependencies = { "ray-x/lsp_signature.nvim", "hrsh7th/cmp-nvim-lsp" },
         config = function()
             require("config.lspconfig")
-            vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "Code hover documentation" })
-            vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "Code goto definition" })
-            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
+            vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over documentation" })
+            vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "[C]ode goto [D]efinition" })
+            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ctions" })
             vim.keymap.set("n", "<leader>cr", require("telescope.builtin").lsp_references,
-                { desc = "Code goto references" })
+                { desc = "[C]ode goto [R]eferences" })
             vim.keymap.set("n", "<leader>ci", require("telescope.builtin").lsp_implementations,
-                { desc = "Code goto implementations" })
-            vim.keymap.set("n", "<leader>cR", vim.lsp.buf.rename, { desc = "Code rename" })
-            vim.keymap.set("n", "<leader>cD", vim.lsp.buf.declaration, { desc = "Code goto declaration" })
+                { desc = "[C]ode goto [I]mplementations" })
+            vim.keymap.set("n", "<leader>cR", vim.lsp.buf.rename, { desc = "[C]ode [R]ename" })
+            vim.keymap.set("n", "<leader>cD", vim.lsp.buf.declaration, { desc = "[C]ode goto [D]eclaration" })
         end,
     },
 
@@ -172,9 +179,6 @@ return {
         },
         version = "v2.*",
         build = "make install_jsregexp",
-        config = function()
-            require("config.luasnipconfig")
-        end,
     },
 
     {
@@ -324,12 +328,12 @@ return {
         dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep" },
         config = function()
             local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
-            vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Find by grep" })
-            vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = "Find diagnostics" })
-            vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = "Find resume" })
-            vim.keymap.set('n', '<leader>f', builtin.oldfiles, { desc = "Find recent files" })
-            vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find existing buffers" })
+            vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "[F]ind [F]iles" })
+            vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "[F]ind by [G]rep" })
+            vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+            vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = "[F]ind [R]esume" })
+            vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "[F]ind [O]ld files" })
+            vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "[F]ind existing [B]uffers" })
         end
     },
 
@@ -451,10 +455,10 @@ return {
         config = function()
             local springboot_nvim = require("springboot-nvim")
 
-            vim.keymap.set('n', '<leader>Jr', springboot_nvim.boot_run, { desc = 'Java run Spring Boot' })
-            vim.keymap.set('n', '<leader>Jc', springboot_nvim.generate_class, { desc = "Java create class" })
-            vim.keymap.set('n', '<leader>Ji', springboot_nvim.generate_interface, { desc = "Java create interface" })
-            vim.keymap.set('n', '<leader>Je', springboot_nvim.generate_enum, { desc = "Java create enum" })
+            vim.keymap.set('n', '<leader>Jr', springboot_nvim.boot_run, { desc = '[J]ava [R]un Spring Boot' })
+            vim.keymap.set('n', '<leader>Jc', springboot_nvim.generate_class, { desc = "[J]ava create [C]lass" })
+            vim.keymap.set('n', '<leader>Ji', springboot_nvim.generate_interface, { desc = "[J]ava create [I]nterface" })
+            vim.keymap.set('n', '<leader>Je', springboot_nvim.generate_enum, { desc = "[J]ava create [E]num" })
 
             springboot_nvim.setup({})
         end
@@ -504,18 +508,74 @@ return {
                 },
             })
 
-            vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { desc = "Git preview hunk" })
+            vim.keymap.set("n", "<leader>gh", ":Gitsigns preview_hunk<CR>", { desc = "[G]it preview [H]unk" })
         end
     },
 
     {
         "tpope/vim-fugitive",
         config = function()
-            vim.keymap.set("n", "<leader>gb", ":Git blame<CR>", { desc = "Git blame" })
-            vim.keymap.set("n", "<leader>gA", ":Git add .<CR>", { desc = "Git add all" })
-            vim.keymap.set("n", "<leader>ga", ":Git add<CR>", { desc = "Git add" })
-            vim.keymap.set("n", "<leader>gc", ":Git commit", { desc = "Git commit" })
-            vim.keymap.set("n", "<leader>gp", ":Git push", { desc = "Git push" })
+            vim.keymap.set("n", "<leader>gb", ":Git blame<CR>", { desc = "[G]it [B]lame" })
+            vim.keymap.set("n", "<leader>gA", ":Git add .<CR>", { desc = "[G]it [A]dd all" })
+            vim.keymap.set("n", "<leader>ga", ":Git add<CR>", { desc = "[G]it [A]dd" })
+            vim.keymap.set("n", "<leader>gc", ":Git commit", { desc = "[G]it [C]ommit" })
+            vim.keymap.set("n", "<leader>gp", ":Git push", { desc = "[G]it [P]ush" })
+        end
+    },
+
+    {
+        "folke/which-key.nvim",
+        event = "VimEnter",
+        config = function()
+            local which_key = require("which-key")
+
+            which_key.setup()
+
+            which_key.add({
+                { "<leader>/", group = "Comments" }, { "<leader>/_", hidden = true },
+                { "<leader>J", group = "[J]ava" }, { "<leader>J_", hidden = true },
+                { "<leader>c", group = "[C]ode" }, { "<leader>c_", hidden = true },
+                { "<leader>d", group = "[D]ebug" }, { "<leader>d_", hidden = true },
+                { "<leader>e", group = "[E]xplorer" }, { "<leader>e_", hidden = true },
+                { "<leader>f", group = "[F]ind" }, { "<leader>f_", hidden = true },
+                { "<leader>g", group = "[G]it" }, { "<leader>g_", hidden = true },
+                { "<leader>w", group = "[W]indow" }, { "<leader>w_", hidden = true },
+
+            })
+        end
+    },
+
+    {
+        "ThePrimeagen/harpoon",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim"
+        },
+        config = function()
+            vim.keymap.set("n", "<S-m>", "<cmd>lua require('harpoon.mark').add_file()<CR>",
+                { desc = "Harpoon Mark file" })
+            vim.keymap.set("n", "<TAB>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>",
+                { desc = "Harpoon Toggle menu" })
+        end
+    },
+
+    {
+        "numToStr/Comment.nvim",
+        event = { "BufReadPre", "BufNewFile"
+        },
+        dependencies = {
+            "JoosepAlviste/nvim-ts-context-commentstring"
+        },
+        config = function()
+            vim.keymap.set('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)', { desc = "Comment Line" })
+            vim.keymap.set('v', '<leader>/', '<Plug>(comment_toggle_linewise_current)', { desc = "Comment Selected" })
+
+            local comment = require("Comment")
+            local ts_context_comment_string = require("ts_context_commentstring.integrations.comment_nvim")
+
+            comment.setup({
+                pre_hook = ts_context_comment_string.create_pre_hook()
+            })
         end
     }
 }
