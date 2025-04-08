@@ -38,8 +38,8 @@ map("v", ">", ">gv", opts)
 map("v", "<", "<gv", opts)
 
 -- Move lines up and down
-map("n", "<A-j>", ":m .+1<CR>==", opts)     -- move line up(n)
-map("n", "<A-k>", ":m .-2<CR>==", opts)     -- move line down(n)
+map("n", "<A-j>", ":m .+1<CR>==", opts) -- move line up(n)
+map("n", "<A-k>", ":m .-2<CR>==", opts) -- move line down(n)
 map("v", "<A-j>", ":m '>+1<CR>gv=gv", opts) -- move line up(v)
 map("v", "<A-k>", ":m '<-2<CR>gv=gv", opts) -- move line down(v)
 
@@ -62,13 +62,11 @@ map("v", "<leader>sc", ":Silicon<CR><CR>", { desc = "[S]napshot [C]ode" })
 map("n", "<leader>T", ":Telescope<CR>", { desc = "[T]elescope" })
 
 -- DBUI
-map("n", "<leader>db", ":DBUI<CR>", { desc = "[D]ata[B]ase UI" })
-
--- Insert Mode Navigaton
-map("i", "<C-h>", "<left>", opts)
-map("i", "<C-j>", "<down>", opts)
-map("i", "<C-k>", "<up>", opts)
-map("i", "<C-l>", "<right>", opts)
+map("n", "<leader>Db", ":DBUI<CR>", { desc = "[D]ata[B]ase UI" })
 
 -- Remove search highlights after searching
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
+
+-- Buffer removal
+map("n", "<leader>bd", ":lua MiniBufremove.delete()<CR>", { desc = "[b]uffer [d]elete" })
+map("n", "<leader>bu", ":lua MiniBufremove.unshow()<CR>", { desc = "[b]uffer [u]nshow" })
