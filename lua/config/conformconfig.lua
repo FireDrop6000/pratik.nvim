@@ -13,7 +13,6 @@ M.formatters_by_ft = {
 	json = { "prettierd" },
 	jsonc = { "prettierd" },
 	yaml = { "prettierd" },
-	markdown = { "prettierd" },
 	graphql = { "prettierd" },
 	go = { "gofumpt", "golines", "goimports-reviser" },
 	python = { "ruff" },
@@ -25,7 +24,7 @@ M.format_on_save = {
 }
 
 M.format_after_save = {
-		lsp_format = "fallback",
+	lsp_format = "fallback",
 }
 
 return M
