@@ -21,7 +21,7 @@ map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
 
 -- File explorer
-map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Open file [E]xplorer" })
+-- map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Open file [E]xplorer" })
 
 -- Resize windows
 map("n", "<C-right>", ":resize +2<CR>", opts)
@@ -59,7 +59,7 @@ map("n", "<C-s>", ":w<CR>", opts)
 map("v", "<leader>sc", ":Silicon<CR><CR>", { desc = "[S]napshot [C]ode" })
 
 -- Telescope call
-map("n", "<leader>T", ":Telescope<CR>", { desc = "[T]elescope" })
+-- map("n", "<leader>T", ":Telescope<CR>", { desc = "[T]elescope" })
 
 -- DBUI
 map("n", "<leader>Db", ":DBUI<CR>", { desc = "[D]ata[B]ase UI" })
@@ -68,5 +68,5 @@ map("n", "<leader>Db", ":DBUI<CR>", { desc = "[D]ata[B]ase UI" })
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
 
 -- Buffer removal
-map("n", "<leader>bd", ":lua MiniBufremove.delete()<CR>", { desc = "[b]uffer [d]elete" })
+-- map("n", "<leader>bd", ":lua MiniBufremove.delete()<CR>", { desc = "[b]uffer [d]elete" })
 map("n", "<leader>bu", ":lua MiniBufremove.unshow()<CR>", { desc = "[b]uffer [u]nshow" })
