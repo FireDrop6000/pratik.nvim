@@ -128,12 +128,17 @@ return {
 			indent = { enabled = true },
 			input = { enabled = true },
 			picker = { enabled = true },
-			notifier = { enabled = true },
+			notifier = { enabled = true, timeout = 3000 },
 			quickfile = { enabled = true },
 			scope = { enabled = true },
 			scroll = { enabled = true },
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
+			styles = {
+				notification = {
+					wo = { wrap = true }, -- Wrap notifications
+				},
+			},
 		},
 		keys = {
 			-- Top Pickers & Explorer
@@ -685,6 +690,13 @@ return {
 		end,
 	},
 
+	-- Floaterm
+	{
+		"voldikss/vim-floaterm",
+		event = "VeryLazy",
+		cmd = { "FloatermNew", "FloatermToggle", "FloatermPrev", "FloatermNext" },
+	},
+
 	-- Syntax highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -812,9 +824,9 @@ return {
 				event = { "BufReadPre", "BufNewFile" },
 				config = function()
 					require("config.lspconfig")
-					vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over documentation" })
-					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ctions" })
-					vim.keymap.set("n", "<leader>cR", vim.lsp.buf.rename, { desc = "[C]ode [R]ename" })
+					vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "Code hover documentation" })
+					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
+					vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename" })
 				end,
 			},
 		},

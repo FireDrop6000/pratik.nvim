@@ -31,7 +31,7 @@ M.capabilities = require("blink.cmp").get_lsp_capabilities()
 
 local util = require("lspconfig/util")
 
-local servers = { "html", "cssls", "bashls", "basedpyright", "lemminx" }
+local servers = { "html", "cssls", "bashls", "basedpyright", "lemminx", "clangd" }
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = M.on_attach,

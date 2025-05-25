@@ -15,7 +15,8 @@ M.formatters_by_ft = {
 	yaml = { "prettierd" },
 	graphql = { "prettierd" },
 	go = { "gofumpt", "golines", "goimports-reviser" },
-	python = { "ruff" },
+	python = { "black" },
+	c = { "clang_format" },
 }
 
 M.format_on_save = {

@@ -56,17 +56,20 @@ map("i", "<C-e>", "<End>", opts)
 map("n", "<C-s>", ":w<CR>", opts)
 
 -- Snapshot code
-map("v", "<leader>sc", ":Silicon<CR><CR>", { desc = "[S]napshot [C]ode" })
+map("v", "<leader>sc", ":Silicon<CR><CR>", { desc = "Snapshot Code" })
 
 -- Telescope call
 -- map("n", "<leader>T", ":Telescope<CR>", { desc = "[T]elescope" })
 
 -- DBUI
-map("n", "<leader>Db", ":DBUI<CR>", { desc = "[D]ata[B]ase UI" })
+map("n", "<leader>Db", ":DBUI<CR>", { desc = "Database UI" })
 
 -- Remove search highlights after searching
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
 
 -- Buffer removal
 -- map("n", "<leader>bd", ":lua MiniBufremove.delete()<CR>", { desc = "[b]uffer [d]elete" })
-map("n", "<leader>bu", ":lua MiniBufremove.unshow()<CR>", { desc = "[b]uffer [u]nshow" })
+map("n", "<leader>bu", ":lua MiniBufremove.unshow()<CR>", { desc = "Buffer Unshow" })
+
+-- NeoRunner
+map("n", "<F9>", "<cmd> FloatermNew --autoclose=0 --title=NeoRunner nr % <CR>", { desc = "Run NeoRunner" })
