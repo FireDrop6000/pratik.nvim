@@ -79,7 +79,7 @@ M.completion = {
 			},
 		},
 	},
-	documentation = { auto_show = false },
+	documentation = { auto_show = true, window = { border = "single" } },
 	keyword = {
 		range = "full",
 	},
@@ -116,4 +116,23 @@ M.fuzzy = {
 	implementation = "prefer_rust_with_warning",
 }
 
+M.signature = {
+	enabled = false,
+	window = {
+		min_width = 1,
+		max_width = 100,
+		max_height = 10,
+		border = "single", -- Defaults to `vim.o.winborder` on nvim 0.11+ or 'padded' when not defined/<=0.10
+		winblend = 0,
+		winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder",
+		scrollbar = false, -- Note that the gutter will be disabled when border ~= 'none'
+		-- Which directions to show the window,
+		-- falling back to the next direction when there's not enough space,
+		-- or another window is in the way
+		direction_priority = { "n", "s" },
+		-- Disable if you run into performance issues
+		treesitter_highlighting = true,
+		show_documentation = false,
+	},
+}
 return M

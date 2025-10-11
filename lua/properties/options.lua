@@ -4,12 +4,12 @@ vim.opt.shiftwidth = 4
 vim.opt.number = true
 vim.wo.fillchars = "eob: "
 vim.opt.clipboard = "unnamedplus"
-vim.opt.fillchars:append('eob: ')
+vim.opt.fillchars:append("eob: ")
 vim.opt.shortmess:append({ I = true })
 vim.opt.wrap = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 2
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 999
 vim.opt.sidescrolloff = 8
 vim.opt.expandtab = true
 vim.opt.softtabstop = 4
@@ -28,3 +28,8 @@ vim.opt.cursorline = true
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.termguicolors = true
+vim.opt.splitkeep = "cursor"
+vim.opt.winminwidth = 5
+vim.opt.mouse = ""
+vim.cmd("colorscheme vague")

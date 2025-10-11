@@ -5,7 +5,7 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			options = {
-				theme = "catppuccin",
+				theme = "auto",
 				icons_enabled = false,
 				component_separators = "",
 				section_separators = { left = "", right = "" },
@@ -722,6 +722,17 @@ return {
 	},
 
 	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+
+			"jay-babu/mason-nvim-dap.nvim",
+
+			"rcarriga/nvim-dap-ui",
+
+			"nvim-neotest/nvim-nio",
+		},
+	},
+	{
 		"L3MON4D3/LuaSnip",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
@@ -742,16 +753,6 @@ return {
 				opts = {
 					symbol_map = {
 						Copilot = "",
-					},
-				},
-			},
-			{
-				"ray-x/lsp_signature.nvim",
-				opts = {
-					hint_prefix = {
-						above = "↙ ", -- when the hint is on the line above the current line
-						current = "← ", -- when the hint is on the same line
-						below = "↖ ", -- when the hint is on the line below the current line
 					},
 				},
 			},
@@ -912,19 +913,13 @@ return {
 	-- Vim-tmux sync
 	{
 		"christoomey/vim-tmux-navigator",
+		event = "VeryLazy",
 		cmd = {
 			"TmuxNavigateLeft",
 			"TmuxNavigateDown",
 			"TmuxNavigateUp",
 			"TmuxNavigateRight",
 			"TmuxNavigatePrevious",
-		},
-		keys = {
-			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
 	},
 
@@ -947,6 +942,12 @@ return {
 	},
 
 	-- Colorschemes
+	{
+		"RRethy/nvim-base16",
+		config = function()
+			require("config.theme")
+		end,
+	},
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -1002,7 +1003,124 @@ return {
 					which_key = false,
 				},
 			})
-			vim.cmd([[colorscheme catppuccin]])
+		end,
+	},
+
+	{
+		"scottmckendry/cyberdream.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("cyberdream").setup({
+				-- Set light or dark variant
+				variant = "light",
+			})
+		end,
+	},
+
+	{
+		"webhooked/kanso.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("kanso").setup({
+				theme = "pearl",
+			})
+		end,
+	},
+
+	{
+		"sainnhe/everforest",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.everforest_enable_italic = true
+			vim.o.background = "dark"
+			vim.g.everforest_background = "soft"
+		end,
+	},
+
+	{
+		"loctvl842/monokai-pro.nvim",
+		config = function()
+			require("monokai-pro").setup({
+				--- @param filter "classic" | "machine" | "octagon" | "pro" | "ristretto" | "spectrum"
+				overridePalette = function(filter)
+					return {
+						background = "#1d2a33",
+					}
+				end,
+				devicons = true, -- highlight the icons of `nvim-web-devicons`
+				styles = {
+					comment = { italic = true },
+					keyword = { italic = true }, -- any other keyword
+					type = { italic = true }, -- (preferred) int, long, char, etc
+					storageclass = { italic = true }, -- static, register, volatile, etc
+					structure = { italic = true }, -- struct, union, enum, etc
+					parameter = { italic = true }, -- parameter pass in function
+					annotation = { italic = true },
+					tag_attribute = { italic = true }, -- attribute of tag in reactjs
+				},
+				inc_search = "background", -- underline | background
+				background_clear = {
+					-- "float_win",
+					"toggleterm",
+					"telescope",
+					-- "which-key",
+					"renamer",
+					"notify",
+					-- "nvim-tree",
+					-- "neo-tree",
+					-- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
+				}, -- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
+				plugins = {
+					bufferline = {
+						underline_selected = false,
+						underline_visible = false,
+					},
+					indent_blankline = {
+						context_highlight = "default", -- default | pro
+						context_start_underline = false,
+					},
+				},
+			})
+		end,
+	},
+
+	{
+		"vague2k/vague.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other plugins
+		config = function()
+			-- NOTE: you do not need to call setup if you don't want to.
+			require("vague").setup({
+				-- Override highlights or add new highlights
+				on_highlights = function(highlights, colors) end,
+
+				plugins = {
+					cmp = {
+						match = "bold",
+						match_fuzzy = "bold",
+					},
+					dashboard = {
+						footer = "italic",
+					},
+					lsp = {
+						diagnostic_error = "bold",
+						diagnostic_hint = "none",
+						diagnostic_info = "italic",
+						diagnostic_ok = "none",
+						diagnostic_warn = "bold",
+					},
+					neotest = {
+						focused = "bold",
+						adapter_name = "bold",
+					},
+					telescope = {
+						match = "bold",
+					},
+				},
+			})
 		end,
 	},
 
@@ -1085,7 +1203,7 @@ return {
 		opts = {},
 	},
 
-	-- SUrround
+	-- Surround
 	{
 		"kylechui/nvim-surround",
 		event = "VeryLazy",
