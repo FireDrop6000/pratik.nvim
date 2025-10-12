@@ -1,6 +1,11 @@
 # pratik.nvim
 ## Neovim setup based on my use cases (plugins inclusive)
 
+## Prerequisites
+
+1. [fd](https://github.com/sharkdp/fd)
+2.  
+
 ### Installation
 
 ```sh
