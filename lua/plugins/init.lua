@@ -1064,6 +1064,13 @@ return {
         end,
     },
 
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = { style = "storm" },
+	},
+
     {
         "loctvl842/monokai-pro.nvim",
         config = function()
@@ -1152,6 +1159,7 @@ return {
         "easymotion/vim-easymotion",
     },
 
+
     -- Git support
     {
         "lewis6991/gitsigns.nvim",
@@ -1185,28 +1193,6 @@ return {
         },
     },
 
-    -- Faster navigation
-    {
-        "ThePrimeagen/harpoon",
-        event = "VeryLazy",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        config = function()
-            vim.keymap.set(
-                "n",
-                "<S-m>",
-                "<cmd>lua require('harpoon.mark').add_file()<CR>",
-                { desc = "Harpoon Mark file" }
-            )
-            vim.keymap.set(
-                "n",
-                "<TAB>",
-                "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>",
-                { desc = "Harpoon Toggle menu" }
-            )
-        end,
-    },
 
     -- Comment support
     {

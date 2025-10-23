@@ -32,4 +32,4 @@ vim.opt.termguicolors = true
 vim.opt.splitkeep = "cursor"
 vim.opt.winminwidth = 5
 vim.opt.mouse = ""
-vim.cmd("colorscheme vague")
+vim.cmd("colorscheme tokyonight")
